@@ -2,7 +2,7 @@ name: Sync Plugin
 
 on:
   schedule:
-    - cron:  '*/15 * * * *'
+    - cron:  '0 0 * * 0'
 
 jobs:
   sync:
