@@ -1,0 +1,28 @@
+name: Sync Plugin
+
+on:
+  schedule:
+    - cron:  '*/15 * * * *'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Clone Remote Repo
+      id: status
+      run: git clone --depth 1 https://github.com/pantheon-systems/WordPress.git /tmp/wp
+    - name: Sync Plugin Files
+      run: |
+        rsync -av /tmp/wp/wp-content/mu-plugins/pantheon.php pantheon.php
+        rsync -av --delete /tmp/wp/wp-content/mu-plugins/pantheon/ pantheon/
+    - name: Committing Changes
+      run: |
+        git config user.email "actions@github.com"
+        git config user.name "Github Actions"
+        git checkout master
+        if [ ! -z $(git status --porcelain) ]; then
+          git add .
+          git commit -m "Committing upstream changes."
+          git push https://${{ github.actor }}:${{ secrets.TOKEN }}@github.com/${{ github.repository }}.git
+        fi
