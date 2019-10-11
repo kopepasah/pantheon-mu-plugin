@@ -4,7 +4,7 @@ This repo syncs [Pantheon's WordPress Must Use Plugin][2] from the Official [Pan
 
 ## Why?
 
-Simple answer is I needed to use this must use plugin on a project that was not using Pantheon's WordPress Upstream (or any upstream, for that matter);
+Simple answer is I needed to use this must use plugin on a project that was not using Pantheon's WordPress Upstream (or any upstream, for that matter).
 
 ## Installation
 
